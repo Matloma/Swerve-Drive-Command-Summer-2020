@@ -96,6 +96,9 @@ public class RobotContainer {
     
     JoystickButton track = new JoystickButton(xbox, XboxController.Button.kA.value);
     track.whileHeld(new VisionTrack(vision, driveTrain));
+
+    JoystickButton move = new JoystickButton(xbox, XboxController.Button.kY.value);
+    move.whenPressed(new DriveToDistanceY(driveTrain, 1, 1));
   }
   
   public static void resetGyro() {
