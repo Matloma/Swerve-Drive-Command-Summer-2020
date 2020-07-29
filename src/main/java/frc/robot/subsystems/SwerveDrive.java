@@ -90,15 +90,22 @@ public class SwerveDrive extends SubsystemBase {
 
   public void printNumbers(){
     SmartDashboard.putNumber("Front Left Speed", frontLeft.speedMetersPerSecond);
-    // SmartDashboard.putNumber("Front Right Speed", frontRight.speedMetersPerSecond);
-    // SmartDashboard.putNumber("Back Left Speed", backLeft.speedMetersPerSecond);
-    // SmartDashboard.putNumber("Back Right Speed", backRight.speedMetersPerSecond);
+    SmartDashboard.putNumber("Front Right Speed", frontRight.speedMetersPerSecond);
+    SmartDashboard.putNumber("Back Left Speed", backLeft.speedMetersPerSecond);
+    SmartDashboard.putNumber("Back Right Speed", backRight.speedMetersPerSecond);
     SmartDashboard.putNumber("Front Left Target Angle", frontLeft.angle.getDegrees());
-    // SmartDashboard.putNumber("Front Right Target Angle", frontRight.angle.getDegrees());
-    // SmartDashboard.putNumber("Back Left Target Angle", backLeft.angle.getDegrees());
-    // SmartDashboard.putNumber("Back Right Target Angle", backRight.angle.getDegrees()); 
+    SmartDashboard.putNumber("Front Right Target Angle", frontRight.angle.getDegrees());
+    SmartDashboard.putNumber("Back Left Target Angle", backLeft.angle.getDegrees());
+    SmartDashboard.putNumber("Back Right Target Angle", backRight.angle.getDegrees()); 
+
     SmartDashboard.putNumber("Front Left Position", FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
     SmartDashboard.putNumber("Front Left Angle", FLA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
+    SmartDashboard.putNumber("Front Right Position", FRS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
+    SmartDashboard.putNumber("Front Right Angle", FRA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
+    SmartDashboard.putNumber("Back Left Position", BLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
+    SmartDashboard.putNumber("Back Left Angle", BLA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
+    SmartDashboard.putNumber("Back Right Position", BRS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
+    SmartDashboard.putNumber("Back Right Angle", BRA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
   }
 
   public void drive(double Y, double X, double R) {
