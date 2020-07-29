@@ -133,6 +133,21 @@ public class SwerveDrive extends SubsystemBase {
     drive(xbox.getY(Hand.kLeft)*-1, xbox.getX(Hand.kLeft), xbox.getX(Hand.kRight));
   }
 
+  public boolean driveToDistanceAngle(double setPoint, double angle, double speed){
+    setSpeedMotor0();
+
+    double yAngle = Math.cos(Math.toRadians(angle));
+    double xAngle = Math.sin(Math.toRadians(angle));
+
+    while(FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPoint-Constants.slowDownDistance*(FLS.getSelectedSensorVelocity()/2048.0*10/52.5)){
+      drive(yAngle, xAngle, 0); 
+      printNumbers();
+    }
+    stop();
+    setSpeedMotor0();
+    return true;
+  }
+
   public boolean driveToDistanceY(double setPointY, double speed){
 
     setSpeedMotor0();
