@@ -39,6 +39,9 @@ public class RobotContainer {
   private final Intake intake;
   private final IntakeXbox intakeXbox;
 
+  private final Loader loader;
+  private final LoadXbox loadXbox;
+
   private final Shooter shooter;
   private final ShootXbox shootXbox;
 
@@ -67,14 +70,19 @@ public class RobotContainer {
     intakeXbox.addRequirements(intake);
     intake.setDefaultCommand(intakeXbox);
 
+    loader = new Loader();
+    loadXbox = new LoadXbox(loader);
+    loadXbox.addRequirements(loader);
+    loader.setDefaultCommand(loadXbox);
+
     shooter = new Shooter();
     shootXbox = new ShootXbox(shooter);
     shootXbox.addRequirements(shooter);
     shooter.setDefaultCommand(shootXbox);
 
-    autonomousOne = new AutonomousOne(driveTrain, intake, shooter);
-    autonomousTwo = new AutonomousTwo(driveTrain, intake, shooter);
-    autonomousThree = new AutonomousThree(driveTrain, intake, shooter);
+    autonomousOne = new AutonomousOne(driveTrain, intake, loader, shooter);
+    autonomousTwo = new AutonomousTwo(driveTrain, intake, loader, shooter);
+    autonomousThree = new AutonomousThree(driveTrain, intake, loader, shooter);
 
     chooser.setDefaultOption("Autonomous One", autonomousOne);
     chooser.addOption("Autonomous Two", autonomousTwo);
@@ -111,7 +119,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
     return chooser.getSelected();
     // return getTeamStationCommand();
   }

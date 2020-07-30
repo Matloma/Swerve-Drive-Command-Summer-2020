@@ -15,7 +15,7 @@ import frc.robot.RobotContainer;
 public class IntakeXbox extends CommandBase {
   Intake intake;
   /**
-   * Creates a new Intake.
+   * Creates a new IntakeXbox.
    */
   public IntakeXbox(Intake intake){
     this.intake = intake;

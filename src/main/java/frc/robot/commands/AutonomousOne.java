@@ -17,7 +17,7 @@ public class AutonomousOne extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousOne.
    */
-  public AutonomousOne(SwerveDrive driveTrain, Intake intake, Shooter shooter) {
+  public AutonomousOne(SwerveDrive driveTrain, Intake intake, Loader loader, Shooter shooter) {
     addCommands(new ResetGyro(),
                 new DriveToDistanceY(driveTrain, 1, 1), 
                 new IntakeBallTimed(intake, 2, 1),  

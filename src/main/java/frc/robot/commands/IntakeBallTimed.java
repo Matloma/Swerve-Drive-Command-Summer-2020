@@ -19,7 +19,7 @@ public class IntakeBallTimed extends CommandBase {
   Timer timer;
   private double time;
   /**
-   * Creates a new Intake.
+   * Creates a new IntakeBallTimed.
    */
   public IntakeBallTimed(Intake intake, double time,  double speed) {
     this.intake = intake;

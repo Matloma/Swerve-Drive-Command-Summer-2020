@@ -30,6 +30,7 @@ public final class Constants {
     
 	//PWM Ports
 	public static final int shooterPWMPort = 0;
+	public static final int loaderPWMPort = 1;
 
 	//Other Ports
 	public static final int xboxPort = 0;
@@ -38,11 +39,12 @@ public final class Constants {
     public static final double wheelPositionAbsoluteValue = 0.2643787403; //Distance of wheel from center of robot
 	public static final double throttle = 1;  //Teleop max speed
 	public static final double autonomousSpeed = 1;   //autonomous drivetrain max speed
-	public static final double speedGearReduction = 9.52/0.3216990877;  //FOR TESTING PURPOSES --- reduction of drive motors and conversion to meters per second
+	public static final double speedGearReduction = 10.33/0.3216990877;  //FOR TESTING PURPOSES --- reduction of drive motors and conversion to meters per second
 	public static final double angleGearReduction = 1;   //FOR TESTING PURPOSES --- reduction of steering motors
 	public static final double intakeMaxSpeed = 1;   //overall Intake Max speed
-	public static final double shooterMaxSpeed = 1;   //overall shooter max speed
-	public static final double slowDownDistance = 0.1;   //distance before setPoint before motors turn off - safety measurement based on speed of motors at any given point
+	public static final double loaderMaxSpeed = 1;   //overall Loader Max speed
+	public static final double shooterMaxSpeed = 1;   //overall Shooter Max speed
+	public static final double slowDownDistance = 0.1;   //distance around setPoint before motors turn off - safety measurement based on speed of motors at any given point
 
 
 	/*COMMENTS

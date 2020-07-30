@@ -18,11 +18,12 @@ public class AutonomousThree extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousThree.
    */
-  public AutonomousThree(SwerveDrive driveTrain, Intake intake, Shooter shooter) {
+  public AutonomousThree(SwerveDrive driveTrain, Intake intake, Loader loader, Shooter shooter) {
     addCommands(new ResetGyro(),
-                new DriveToDistanceX(driveTrain, .1, 1), 
-                new ParallelCommandGroup(new ShootBallTimed(shooter, .5, 1), 
-                                         new IntakeBallTimed(intake, .5, 1))
+                new DriveToDistanceX(driveTrain, 1, 1), 
+                new ParallelCommandGroup(new ShootBallTimed(shooter, 1, 1), 
+                                         new IntakeBallTimed(intake, 1, 1)),
+                new DriveToDistanceY(driveTrain, 5, 1)
     );
   }
 }
