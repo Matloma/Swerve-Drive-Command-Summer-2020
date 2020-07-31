@@ -33,17 +33,18 @@ public class ShootBallTimed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    finish = false;
     timer.reset();
     timer.start();
-    while(timer.get() < time){
-      shooter.shoot(speed*Constants.intakeMaxSpeed);
-    }
-    finish = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(timer.get() < time)
+      shooter.shoot(speed*Constants.intakeMaxSpeed);
+    else
+      finish = true;
   }
 
   // Called once the command ends or is interrupted.

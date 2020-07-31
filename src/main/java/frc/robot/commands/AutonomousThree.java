@@ -22,7 +22,8 @@ public class AutonomousThree extends SequentialCommandGroup {
     addCommands(new ResetGyro(),
                 new DriveToDistanceX(driveTrain, 1, 1), 
                 new ParallelCommandGroup(new ShootBallTimed(shooter, 1, 1), 
-                                         new IntakeBallTimed(intake, 1, 1)),
+                                         new IntakeBallTimed(intake, 1, 1),
+                                         new DriveTimed(driveTrain, 3, .5, .5, 0)),
                 new DriveToDistanceY(driveTrain, 5, 1)
     );
   }

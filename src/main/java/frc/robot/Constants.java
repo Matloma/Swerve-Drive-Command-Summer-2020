@@ -44,7 +44,7 @@ public final class Constants {
 	public static final double intakeMaxSpeed = 1;   //overall Intake Max speed
 	public static final double loaderMaxSpeed = 1;   //overall Loader Max speed
 	public static final double shooterMaxSpeed = 1;   //overall Shooter Max speed
-	public static final double slowDownDistance = 0.1;   //distance around setPoint before motors turn off - safety measurement based on speed of motors at any given point
+	public static final double slowDownDistance = 0.4;   //distance around setPoint before motors turn off - safety measurement based on speed of motors at any given point
 
 
 	/*COMMENTS

@@ -87,7 +87,7 @@ public class RobotContainer {
     chooser.setDefaultOption("Autonomous One", autonomousOne);
     chooser.addOption("Autonomous Two", autonomousTwo);
     chooser.addOption("Autonomous Three", autonomousThree);
-    SmartDashboard.putData("Autonomous", chooser);
+    SmartDashboard.putData("Autonomous Chooser", chooser);
     // Configure the button bindings
     configureButtonBindings();
   }

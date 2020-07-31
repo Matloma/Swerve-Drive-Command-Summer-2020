@@ -32,17 +32,18 @@ public class LoadBallTimed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    finish = false;
     timer.reset();
     timer.start();
-    while(timer.get() < time){
-      loader.loadBall(speed*Constants.loaderMaxSpeed);
-    }
-    finish = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(timer.get() < time)
+      loader.loadBall(speed*Constants.loaderMaxSpeed);
+    else
+      finish = true;
   }
 
   // Called once the command ends or is interrupted.

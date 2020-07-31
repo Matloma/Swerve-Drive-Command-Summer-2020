@@ -38,25 +38,30 @@ public class DriveTimed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    driveTrain.setSpeedMotor0();
+    finish = false;
     timer.reset();
     timer.start();
-    while(timer.get() < time){
-      driveTrain.drive(speedY*Constants.autonomousSpeed, 
-                       speedX*Constants.autonomousSpeed, 
-                       speedR*Constants.autonomousSpeed
-      );
-    }
-    finish = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(timer.get() < time)
+      driveTrain.drive(speedY*Constants.autonomousSpeed, 
+                       speedX*Constants.autonomousSpeed, 
+                       speedR*Constants.autonomousSpeed
+      );
+    else{
+      driveTrain.setSpeedMotor0();
+      finish = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    driveTrain.setSpeedMotor0();
     driveTrain.stop();
   }
 
