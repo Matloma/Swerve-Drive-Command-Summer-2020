@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -30,6 +31,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static XboxController xbox;
   public static AHRS gyro;
+  public static ColorSensorV3 colorSensor;
 
   private final SwerveDrive driveTrain;
   private final DriveXbox driveXbox;
@@ -45,6 +47,9 @@ public class RobotContainer {
   private final Shooter shooter;
   private final ShootXbox shootXbox;
 
+  private final ColorWheel colorWheel;
+  private final SpinUntilColor spinUntilColor;
+
   private final AutonomousOne autonomousOne;
   private final AutonomousTwo autonomousTwo;
   private final AutonomousThree autonomousThree;
@@ -57,6 +62,7 @@ public class RobotContainer {
   public RobotContainer() {
     xbox = new XboxController(Constants.xboxPort);
     gyro = new AHRS();
+    colorSensor = new ColorSensorV3(Constants.i2cPort);
 
     driveTrain = new SwerveDrive(xbox, gyro);
     driveXbox = new DriveXbox(driveTrain);
@@ -79,6 +85,10 @@ public class RobotContainer {
     shootXbox = new ShootXbox(shooter);
     shootXbox.addRequirements(shooter);
     shooter.setDefaultCommand(shootXbox);
+
+    colorWheel = new ColorWheel(colorSensor);
+    spinUntilColor = new SpinUntilColor(colorWheel);
+    spinUntilColor.addRequirements(colorWheel);
 
     autonomousOne = new AutonomousOne(driveTrain, vision, intake, loader, shooter);
     autonomousTwo = new AutonomousTwo(driveTrain, vision, intake, loader, shooter);
@@ -105,8 +115,8 @@ public class RobotContainer {
     JoystickButton track = new JoystickButton(xbox, XboxController.Button.kA.value);
     track.whileHeld(new VisionTrack(vision, driveTrain));
 
-    JoystickButton move = new JoystickButton(xbox, XboxController.Button.kY.value);
-    move.whenPressed(new DriveToDistanceY(driveTrain, 1, 1));
+    JoystickButton moveToColor = new JoystickButton(xbox, XboxController.Button.kY.value);
+    moveToColor.whileHeld(spinUntilColor);
   }
   
   public static void resetGyro() {
