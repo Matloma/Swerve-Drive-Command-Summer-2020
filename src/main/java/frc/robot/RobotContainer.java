@@ -117,6 +117,9 @@ public class RobotContainer {
 
     JoystickButton moveToColor = new JoystickButton(xbox, XboxController.Button.kY.value);
     moveToColor.whileHeld(spinUntilColor);
+
+    JoystickButton spinColorWheel = new JoystickButton(xbox, XboxController.Button.kBumperLeft.value);
+    spinColorWheel.whileHeld(new SpinColorWheel(colorWheel));
   }
   
   public static void resetGyro() {

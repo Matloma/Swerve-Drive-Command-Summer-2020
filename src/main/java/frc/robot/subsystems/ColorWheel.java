@@ -73,38 +73,46 @@ public class ColorWheel extends SubsystemBase {
   public void spinUntilColor(){
     String gameData = DriverStation.getInstance().getGameSpecificMessage();
     if(gameData.length() > 0){
-      switch(gameData.charAt(0)){
+      switch(gameData.toUpperCase().charAt(0)){
         case 'B': //Red is 2 sections after Blue, meaning Blue will be below the sensor when red is detected by the robot. Same case for other colors.
-          if((match.color != redTarget))
-            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
-          else
+          SmartDashboard.putString("ColorSensor","Blue");  
+          if(match.color == redTarget)
             stop();
+          else
+            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
           break;
         case 'Y': 
-          if((match.color != greenTarget))
-            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
-          else
+          SmartDashboard.putString("ColorSensor","Yellow");
+          if(match.color == greenTarget)
             stop();
+          else
+            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
           break;
         case 'R': 
-          if((match.color != blueTarget))
-            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
-          else
+          SmartDashboard.putString("ColorSensor","Red");
+          if(match.color == blueTarget)
             stop();
+          else
+            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
           break;
         case 'G': 
-          if((match.color != yellowTarget))
-            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
-          else
+          SmartDashboard.putString("ColorSensor","Green");
+          if(match.color == yellowTarget)
             stop();
+          else
+            colorWheelMotor.set(Constants.colorWheelMotorMaxSpeed);
           break;
         default: 
-          System.out.println("GAME DATA IS NOT VALID");
+          SmartDashboard.putString("ColorSensor","GAME DATA IS NOT VALID");
           break;
       }
     } else {
-      System.out.println("NO GAME DATA RECEIVED");
+      SmartDashboard.putString("ColorSensor","NO GAME DATA RECEIVED");
     }
+  }
+
+  public void spin(double speed){
+    colorWheelMotor.set(speed);
   }
 
   public void stop(){
