@@ -17,12 +17,13 @@ public class AutonomousOne extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousOne.
    */
-  public AutonomousOne(SwerveDrive driveTrain, Intake intake, Loader loader, Shooter shooter) {
+  public AutonomousOne(SwerveDrive driveTrain, Vision vision, Intake intake, Loader loader, Shooter shooter) {
     addCommands(new ResetGyro(),
                 new DriveToDistanceY(driveTrain, 1, 1), 
                 new IntakeBallTimed(intake, 2, 1),  
                 new DriveToDistanceX(driveTrain, 1, 1),
-                new DriveToDistanceY(driveTrain, -5, 1)
+                new DriveToDistanceY(driveTrain, -5, 1),
+                new VisionTrackTimed(vision, driveTrain, 3)
     );
   }
 }

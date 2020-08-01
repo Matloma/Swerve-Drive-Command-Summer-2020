@@ -18,7 +18,7 @@ public class AutonomousThree extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousThree.
    */
-  public AutonomousThree(SwerveDrive driveTrain, Intake intake, Loader loader, Shooter shooter) {
+  public AutonomousThree(SwerveDrive driveTrain, Vision vision, Intake intake, Loader loader, Shooter shooter) {
     addCommands(new ResetGyro(),
                 new DriveToDistanceX(driveTrain, 1, 1), 
                 new ParallelCommandGroup(new ShootBallTimed(shooter, 1, 1), 

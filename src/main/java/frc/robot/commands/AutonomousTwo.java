@@ -17,7 +17,7 @@ public class AutonomousTwo extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousTwo.
    */
-  public AutonomousTwo(SwerveDrive driveTrain, Intake intake, Loader loader, Shooter shooter) {
+  public AutonomousTwo(SwerveDrive driveTrain, Vision vision, Intake intake, Loader loader, Shooter shooter) {
     addCommands(new ResetGyro(),
                 new DriveToDistanceY(driveTrain, -1, 1), 
                 new LoadBallTimed(loader, 1, 1),

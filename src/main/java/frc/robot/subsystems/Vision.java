@@ -10,7 +10,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import io.github.pseudoresonance.pixy2api.*;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import java.util.ArrayList;
 
 public class Vision extends SubsystemBase {
@@ -48,15 +50,19 @@ public class Vision extends SubsystemBase {
       SmartDashboard.putNumber("Y-Coord", ycoord);
       SmartDashboard.putString("Data", data);
       
-      if(xcoord<pixy.getFrameWidth()/2-10)   //This allows for a precision of 10 pixels on the Pixy2. Can be modified at any point during testing
-        driveTrain.drive(0, 0, -.3);
-      else if(xcoord>pixy.getFrameWidth()/2+10)
-        driveTrain.drive(0, 0, .3);
-      else if(xcoord>pixy.getFrameWidth()/2-10&&xcoord<pixy.getFrameWidth()/2+10)
+      if(xcoord<pixy.getFrameWidth()/2-Constants.pixyPrecisionInPixels)   //This allows for a precision of 10 pixels on the Pixy2. Can be modified at any point during testing
+        driveTrain.drive(0, 0, -.15);
+      else if(xcoord>pixy.getFrameWidth()/2+Constants.pixyPrecisionInPixels)
+        driveTrain.drive(0, 0, .15);
+      else if(xcoord>pixy.getFrameWidth()/2-Constants.pixyPrecisionInPixels&&xcoord<pixy.getFrameWidth()/2+Constants.pixyPrecisionInPixels)
         driveTrain.stop();
     }
     else 
       SmartDashboard.putBoolean("present", false);
     SmartDashboard.putNumber("Blocks", blocks.size());
+  }
+
+  public void camera(){
+    SmartDashboard.putData("Video", (Sendable)pixy.getVideo());
   }
 }

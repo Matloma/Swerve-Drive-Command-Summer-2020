@@ -80,9 +80,9 @@ public class RobotContainer {
     shootXbox.addRequirements(shooter);
     shooter.setDefaultCommand(shootXbox);
 
-    autonomousOne = new AutonomousOne(driveTrain, intake, loader, shooter);
-    autonomousTwo = new AutonomousTwo(driveTrain, intake, loader, shooter);
-    autonomousThree = new AutonomousThree(driveTrain, intake, loader, shooter);
+    autonomousOne = new AutonomousOne(driveTrain, vision, intake, loader, shooter);
+    autonomousTwo = new AutonomousTwo(driveTrain, vision, intake, loader, shooter);
+    autonomousThree = new AutonomousThree(driveTrain, vision, intake, loader, shooter);
 
     chooser.setDefaultOption("Autonomous One", autonomousOne);
     chooser.addOption("Autonomous Two", autonomousTwo);
