@@ -36,10 +36,12 @@ public final class Constants {
 	public static final int shooterPWMPort = 0;
 	public static final int loaderPWMPort = 1;
 	public static final int colorWheelMotorPWMPort = 2;
+	public static final int aimingServoPWMPort = 3;
 
 	//Other Ports
 	public static final int xboxPort = 0;
 	public static final I2C.Port i2cPort = I2C.Port.kOnboard;
+	public static final int ultrasonicSensorPort = 0;
 
 	//Motor Speeds
 	public static final double throttle = 1;  //Teleop max speed
@@ -55,6 +57,7 @@ public final class Constants {
 	public static final double angleGearReduction = 1;   //FOR TESTING PURPOSES --- reduction of steering motors
 	public static final double slowDownDistance = 0.4;   //distance around setPoint before motors turn off - safety measurement based on speed of motors at any given point
 	public static final int pixyPrecisionInPixels = 20;
+	public static final double heightOfShooterFromCarpet = 1;
 
 
 	/*COMMENTS

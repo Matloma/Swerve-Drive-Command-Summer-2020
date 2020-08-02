@@ -10,21 +10,41 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter extends SubsystemBase {
   Victor shooter;
+  Servo servo;
+  AnalogInput ultrasonic;
+  double finalTheta = 65;
+  double distanceKnown; //distance in meters from an object
+  DistanceObject[] vals;
+
   /**
    * Creates a new Shooter.
    */
-  public Shooter() {
+  public Shooter(AnalogInput ultrasonic) {
     shooter = new Victor(Constants.shooterPWMPort);
+    servo = new Servo(Constants.aimingServoPWMPort);
+    this.ultrasonic = ultrasonic;
+    distanceKnown = ultrasonic.getValue()*0.125*2.54/100;
+    vals = new DistanceObject[55];
+
+    for(int i = 0; i < vals.length; i++){
+      double temp = i+10;
+      vals[i] = new DistanceObject(temp);
+    }
+
+
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    distanceKnown = ultrasonic.getValue()*0.125*2.54/100;    
   }
 
   public void shootXbox(XboxController xbox, double speed){
@@ -37,5 +57,17 @@ public class Shooter extends SubsystemBase {
 
   public void stop(){
     shooter.set(0);
+  }
+
+  public void aim(){
+    for(int i = 0; i < vals.length; i++){
+      if(vals[i].getDistance() > distanceKnown){
+        finalTheta = vals[i].getTheta();
+        break;
+      }
+    }
+    
+    servo.setAngle(finalTheta);
+
   }
 }

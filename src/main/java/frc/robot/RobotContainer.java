@@ -10,6 +10,7 @@ package frc.robot;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -32,6 +33,7 @@ public class RobotContainer {
   public static XboxController xbox;
   public static AHRS gyro;
   public static ColorSensorV3 colorSensor;
+  public static AnalogInput ultrasonic;
 
   private final SwerveDrive driveTrain;
   private final DriveXbox driveXbox;
@@ -63,6 +65,7 @@ public class RobotContainer {
     xbox = new XboxController(Constants.xboxPort);
     gyro = new AHRS();
     colorSensor = new ColorSensorV3(Constants.i2cPort);
+    ultrasonic = new AnalogInput(Constants.ultrasonicSensorPort);
 
     driveTrain = new SwerveDrive(xbox, gyro);
     driveXbox = new DriveXbox(driveTrain);
@@ -81,7 +84,7 @@ public class RobotContainer {
     loadXbox.addRequirements(loader);
     loader.setDefaultCommand(loadXbox);
 
-    shooter = new Shooter();
+    shooter = new Shooter(ultrasonic);
     shootXbox = new ShootXbox(shooter);
     shootXbox.addRequirements(shooter);
     shooter.setDefaultCommand(shootXbox);
@@ -114,6 +117,7 @@ public class RobotContainer {
     
     JoystickButton track = new JoystickButton(xbox, XboxController.Button.kA.value);
     track.whileHeld(new VisionTrack(vision, driveTrain));
+    track.whileHeld(new Aim(shooter));
 
     JoystickButton moveToColor = new JoystickButton(xbox, XboxController.Button.kY.value);
     moveToColor.whileHeld(spinUntilColor);
