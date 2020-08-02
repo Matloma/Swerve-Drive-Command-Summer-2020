@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -99,7 +100,9 @@ public class RobotContainer {
     hook = new Hook();
     extendHook = new ExtendHook(hook);
     extendHook.addRequirements(hook);
-
+    
+    CommandScheduler.getInstance().registerSubsystem(driveTrain, vision, intake, loader, shooter, colorWheel, hook);
+    
     autonomousOne = new AutonomousOne(driveTrain, vision, intake, loader, shooter);
     autonomousTwo = new AutonomousTwo(driveTrain, vision, intake, loader, shooter);
     autonomousThree = new AutonomousThree(driveTrain, vision, intake, loader, shooter);

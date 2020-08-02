@@ -45,13 +45,14 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    distanceKnown = ultrasonic.getValue()*0.125*2.54/100;    
+    distanceKnown = ultrasonic.getValue()*0.125*2.54/100;     
+    SmartDashboard.putNumber("Servo Angle", servo.getAngle());
+    servo.setAngle(finalTheta);  //Might need some conversion afterward
+
   }
 
   public void shootXbox(XboxController xbox, double speed){
     shooter.set(xbox.getTriggerAxis(Hand.kRight)*speed);
-    servo.setAngle(finalTheta);
-    SmartDashboard.putNumber("Servo Angle", servo.getAngle());
   }
 
   public void shoot(double speed){
@@ -70,19 +71,15 @@ public class Shooter extends SubsystemBase {
       }
     }
     
-    servo.setAngle(finalTheta);  //Might need some conversion afterward
-
   }
 
   public void raiseAim(){
     if(finalTheta < 65)
       finalTheta++;
-    servo.setAngle(finalTheta);
   }
 
   public void lowerAim(){
     if(finalTheta > 10)
       finalTheta--;
-    servo.setAngle(finalTheta);
   }
 }

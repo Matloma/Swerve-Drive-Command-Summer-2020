@@ -10,9 +10,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hook extends SubsystemBase {
   DoubleSolenoid hook;
+  private boolean extended = false;
   /**
    * Creates a new Hook.
    */
@@ -23,13 +25,16 @@ public class Hook extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("Hook Extended?", extended);
   }
 
   public void extend(){
     hook.set(DoubleSolenoid.Value.kForward);
+    extended = true;
   }
 
   public void retract(){
     hook.set(DoubleSolenoid.Value.kReverse);
+    extended = false;
   }
 }

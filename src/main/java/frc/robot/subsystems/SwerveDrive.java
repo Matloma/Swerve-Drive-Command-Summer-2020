@@ -141,7 +141,6 @@ public class SwerveDrive extends SubsystemBase {
 
     while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPoint-Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(yAngle, xAngle, 0); 
-      printNumbers();
     }
     stop();
     setSpeedMotor0();
@@ -154,11 +153,9 @@ public class SwerveDrive extends SubsystemBase {
 
     while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPointY-Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(speed, 0, 0); 
-      printNumbers();
     }
     while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction*-1>setPointY+Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(-speed, 0, 0); 
-      printNumbers();
     }
     stop();
     setSpeedMotor0();
@@ -171,11 +168,9 @@ public class SwerveDrive extends SubsystemBase {
 
     while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPointX-Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(0, speed, 0); 
-      printNumbers();
     }
     while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction*-1>setPointX+Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(0, -speed, 0); 
-      printNumbers();
     }
     stop();
     setSpeedMotor0();
