@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
   Servo servo;
   AnalogInput ultrasonic;
   double finalTheta = 65;
-  double distanceKnown; //distance in meters from an object
+  double distanceKnown; 
   DistanceObject[] vals;
 
   /**
@@ -30,7 +30,7 @@ public class Shooter extends SubsystemBase {
     shooter = new Victor(Constants.shooterPWMPort);
     servo = new Servo(Constants.aimingServoPWMPort);
     this.ultrasonic = ultrasonic;
-    distanceKnown = ultrasonic.getValue()*0.125*2.54/100;
+    distanceKnown = ultrasonic.getValue()*0.125*2.54/100;  //distance in meters from an object
     vals = new DistanceObject[55];
 
     for(int i = 0; i < vals.length; i++){
@@ -67,7 +67,7 @@ public class Shooter extends SubsystemBase {
       }
     }
     
-    servo.setAngle(finalTheta);
+    servo.setAngle(finalTheta);  //Might need some conversion afterward
 
   }
 }

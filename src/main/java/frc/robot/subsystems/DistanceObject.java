@@ -26,10 +26,10 @@ public class DistanceObject {
         height = 2.49 - hi; 
     }
 
-    public double findDistance(double t){
+    private double findDistance(double t){
         double d = 0;
         d = v*Math.cos(Math.toRadians(t));
-        d /= ( ( (-1)*(v)*(Math.sin(Math.toRadians(t))) + Math.sqrt( (Math.pow( ((v)*(Math.sin(Math.toRadians(theta)))), 2)) + 4*(4.905)*(-height)))/-9.81);
+        d *= ( ( (-1)*(v)*(Math.sin(Math.toRadians(t))) + Math.sqrt( (Math.pow( ((v)*(Math.sin(Math.toRadians(theta)))), 2)) + 4*(4.905)*(-height)))/-9.81);
         return d;
     }
 

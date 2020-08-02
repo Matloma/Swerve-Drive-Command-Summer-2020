@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import io.github.pseudoresonance.pixy2api.*;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import java.util.ArrayList;
@@ -62,7 +61,4 @@ public class Vision extends SubsystemBase {
     SmartDashboard.putNumber("Blocks", blocks.size());
   }
 
-  public void camera(){
-    SmartDashboard.putData("Video", (Sendable)pixy.getVideo());
-  }
 }

@@ -88,7 +88,7 @@ public class SwerveDrive extends SubsystemBase {
     printNumbers();
   }
 
-  public void printNumbers(){
+  private void printNumbers(){
     SmartDashboard.putNumber("Front Left Speed", frontLeft.speedMetersPerSecond);
     SmartDashboard.putNumber("Front Right Speed", frontRight.speedMetersPerSecond);
     SmartDashboard.putNumber("Back Left Speed", backLeft.speedMetersPerSecond);
