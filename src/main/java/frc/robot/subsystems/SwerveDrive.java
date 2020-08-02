@@ -1,6 +1,6 @@
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* Open Source Software - may be modified and shared by FrontRightC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
@@ -41,14 +41,14 @@ public class SwerveDrive extends SubsystemBase {
   SwerveModuleState frontRight;
   SwerveModuleState backLeft;
   SwerveModuleState backRight;
-  TalonFX FLS;
-  TalonFX FRS;
-  TalonFX BLS;
-  TalonFX BRS;
-  TalonFX FLA;
-  TalonFX FRA;
-  TalonFX BLA;
-  TalonFX BRA;
+  TalonFX FrontLeftSpeed;
+  TalonFX FrontRightSpeed;
+  TalonFX BackLeftSpeed;
+  TalonFX BackRightSpeed;
+  TalonFX FrontLeftAngle;
+  TalonFX FrontRightAngle;
+  TalonFX BackLeftAngle;
+  TalonFX BackRightAngle;
   
   /**
    * Creates a new SwerveDrive.
@@ -72,14 +72,14 @@ public class SwerveDrive extends SubsystemBase {
     backLeft = moduleStates[2];
     backRight = moduleStates[3];
 
-    FLS = new TalonFX(Constants.frontLeftMotorCanPort);
-    FLA = new TalonFX(Constants.frontLeftAngleCanPort);
-    FRS = new TalonFX(Constants.frontRightMotorCanPort);
-    FRA = new TalonFX(Constants.frontRightAngleCanPort);
-    BLS = new TalonFX(Constants.backLeftMotorCanPort);
-    BLA = new TalonFX(Constants.backLeftAngleCanPort);
-    BRS = new TalonFX(Constants.backRightMotorCanPort);
-    BRA = new TalonFX(Constants.backRightAngleCanPort);
+    FrontLeftSpeed = new TalonFX(Constants.frontLeftMotorCanPort);
+    FrontLeftAngle = new TalonFX(Constants.frontLeftAngleCanPort);
+    FrontRightSpeed = new TalonFX(Constants.frontRightMotorCanPort);
+    FrontRightAngle = new TalonFX(Constants.frontRightAngleCanPort);
+    BackLeftSpeed = new TalonFX(Constants.backLeftMotorCanPort);
+    BackLeftAngle = new TalonFX(Constants.backLeftAngleCanPort);
+    BackRightSpeed = new TalonFX(Constants.backRightMotorCanPort);
+    BackRightAngle = new TalonFX(Constants.backRightAngleCanPort);
   }
 
   @Override
@@ -98,14 +98,14 @@ public class SwerveDrive extends SubsystemBase {
     SmartDashboard.putNumber("Back Left Target Angle", backLeft.angle.getDegrees());
     SmartDashboard.putNumber("Back Right Target Angle", backRight.angle.getDegrees()); 
 
-    SmartDashboard.putNumber("Front Left Position", FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
-    SmartDashboard.putNumber("Front Left Angle", FLA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
-    SmartDashboard.putNumber("Front Right Position", FRS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
-    SmartDashboard.putNumber("Front Right Angle", FRA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
-    SmartDashboard.putNumber("Back Left Position", BLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
-    SmartDashboard.putNumber("Back Left Angle", BLA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
-    SmartDashboard.putNumber("Back Right Position", BRS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
-    SmartDashboard.putNumber("Back Right Angle", BRA.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
+    SmartDashboard.putNumber("Front Left Position", FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
+    SmartDashboard.putNumber("Front Left Angle", FrontLeftAngle.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
+    SmartDashboard.putNumber("Front Right Position", FrontRightSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
+    SmartDashboard.putNumber("Front Right Angle", FrontRightAngle.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
+    SmartDashboard.putNumber("Back Left Position", BackLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
+    SmartDashboard.putNumber("Back Left Angle", BackLeftAngle.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
+    SmartDashboard.putNumber("Back Right Position", BackRightSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction);
+    SmartDashboard.putNumber("Back Right Angle", BackRightAngle.getSelectedSensorPosition()/2048.0/Constants.angleGearReduction*360);
   }
 
   public void drive(double Y, double X, double R) {
@@ -118,14 +118,14 @@ public class SwerveDrive extends SubsystemBase {
     backLeft = moduleStates[2];
     backRight = moduleStates[3];
 
-    FLS.set(TalonFXControlMode.PercentOutput, frontLeft.speedMetersPerSecond*Constants.throttle);  //The maximum speed in MPS from the SwerveDrive class just barely exceeds 1 (1.012 is the highest Ive seen), so using Percent Output is more efficient than Velocity Mode
-    FLA.set(TalonFXControlMode.Position, frontLeft.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);        //*-1 because gyro goes counterclockwise for positive values, but motor doesnt, /360 to get a ratio, *2048 because falcon500 encoders have 2048 points per rotation.
-    FRS.set(TalonFXControlMode.PercentOutput, frontRight.speedMetersPerSecond*Constants.throttle);
-    FRA.set(TalonFXControlMode.Position, frontRight.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);
-    BLS.set(TalonFXControlMode.PercentOutput, backLeft.speedMetersPerSecond*Constants.throttle);
-    BLA.set(TalonFXControlMode.Position, backLeft.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);
-    BRS.set(TalonFXControlMode.PercentOutput, backRight.speedMetersPerSecond*Constants.throttle);
-    BRA.set(TalonFXControlMode.Position, backRight.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);
+    FrontLeftSpeed.set(TalonFXControlMode.PercentOutput, frontLeft.speedMetersPerSecond*Constants.throttle);  //The maximum speed in MPS from the SwerveDrive class just barely exceeds 1 (1.012 is the highest Ive seen), so using Percent Output is more efficient than Velocity Mode
+    FrontLeftAngle.set(TalonFXControlMode.Position, frontLeft.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);        //*-1 because gyro goes counterclockwise for positive values, but motor doesnt, /360 to get a ratio, *2048 because falcon500 encoders have 2048 points per rotation.
+    FrontRightSpeed.set(TalonFXControlMode.PercentOutput, frontRight.speedMetersPerSecond*Constants.throttle);
+    FrontRightAngle.set(TalonFXControlMode.Position, frontRight.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);
+    BackLeftSpeed.set(TalonFXControlMode.PercentOutput, backLeft.speedMetersPerSecond*Constants.throttle);
+    BackLeftAngle.set(TalonFXControlMode.Position, backLeft.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);
+    BackRightSpeed.set(TalonFXControlMode.PercentOutput, backRight.speedMetersPerSecond*Constants.throttle);
+    BackRightAngle.set(TalonFXControlMode.Position, backRight.angle.getDegrees() * -1.0 / 360 * 2048*Constants.angleGearReduction);
     
   }
 
@@ -139,7 +139,7 @@ public class SwerveDrive extends SubsystemBase {
     double yAngle = Math.cos(Math.toRadians(angle));
     double xAngle = Math.sin(Math.toRadians(angle));
 
-    while(FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPoint-Constants.slowDownDistance*(FLS.getSelectedSensorVelocity()/2048.0*10/52.5)){
+    while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPoint-Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(yAngle, xAngle, 0); 
       printNumbers();
     }
@@ -152,11 +152,11 @@ public class SwerveDrive extends SubsystemBase {
 
     setSpeedMotor0();
 
-    while(FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPointY-Constants.slowDownDistance*(FLS.getSelectedSensorVelocity()/2048.0*10/52.5)){
+    while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPointY-Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(speed, 0, 0); 
       printNumbers();
     }
-    while(FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction*-1>setPointY+Constants.slowDownDistance*(FLS.getSelectedSensorVelocity()/2048.0*10/52.5)){
+    while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction*-1>setPointY+Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(-speed, 0, 0); 
       printNumbers();
     }
@@ -169,11 +169,11 @@ public class SwerveDrive extends SubsystemBase {
 
     setSpeedMotor0();
 
-    while(FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPointX-Constants.slowDownDistance*(FLS.getSelectedSensorVelocity()/2048.0*10/52.5)){
+    while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction<setPointX-Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(0, speed, 0); 
       printNumbers();
     }
-    while(FLS.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction*-1>setPointX+Constants.slowDownDistance*(FLS.getSelectedSensorVelocity()/2048.0*10/52.5)){
+    while(FrontLeftSpeed.getSelectedSensorPosition()/2048.0/Constants.speedGearReduction*-1>setPointX+Constants.slowDownDistance*(FrontLeftSpeed.getSelectedSensorVelocity()/2048.0*10/52.5)){
       drive(0, -speed, 0); 
       printNumbers();
     }
@@ -198,23 +198,23 @@ public class SwerveDrive extends SubsystemBase {
   }
 
   public void setSpeedMotor0(){
-    FLS.setSelectedSensorPosition(0);
-    FRS.setSelectedSensorPosition(0);
-    BLS.setSelectedSensorPosition(0);
-    BRS.setSelectedSensorPosition(0);
+    FrontLeftSpeed.setSelectedSensorPosition(0);
+    FrontRightSpeed.setSelectedSensorPosition(0);
+    BackLeftSpeed.setSelectedSensorPosition(0);
+    BackRightSpeed.setSelectedSensorPosition(0);
   }
 
   public void setAngleMotor0(){
-    FLA.setSelectedSensorPosition(0);
-    FRA.setSelectedSensorPosition(0);
-    BLA.setSelectedSensorPosition(0);
-    BRA.setSelectedSensorPosition(0);
+    FrontLeftAngle.setSelectedSensorPosition(0);
+    FrontRightAngle.setSelectedSensorPosition(0);
+    BackLeftAngle.setSelectedSensorPosition(0);
+    BackRightAngle.setSelectedSensorPosition(0);
   }
 
   public void stop(){
-    FLS.set(TalonFXControlMode.PercentOutput, 0);
-    FRS.set(TalonFXControlMode.PercentOutput, 0);
-    BLS.set(TalonFXControlMode.PercentOutput, 0);
-    BRS.set(TalonFXControlMode.PercentOutput, 0);
+    FrontLeftSpeed.set(TalonFXControlMode.PercentOutput, 0);
+    FrontRightSpeed.set(TalonFXControlMode.PercentOutput, 0);
+    BackLeftSpeed.set(TalonFXControlMode.PercentOutput, 0);
+    BackRightSpeed.set(TalonFXControlMode.PercentOutput, 0);
   }
 }
