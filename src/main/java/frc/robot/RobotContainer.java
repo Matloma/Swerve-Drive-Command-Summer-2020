@@ -52,6 +52,9 @@ public class RobotContainer {
   private final ColorWheel colorWheel;
   private final SpinUntilColor spinUntilColor;
 
+  private final Hook hook;
+  private final ExtendHook extendHook;
+
   private final AutonomousOne autonomousOne;
   private final AutonomousTwo autonomousTwo;
   private final AutonomousThree autonomousThree;
@@ -93,6 +96,10 @@ public class RobotContainer {
     spinUntilColor = new SpinUntilColor(colorWheel);
     spinUntilColor.addRequirements(colorWheel);
 
+    hook = new Hook();
+    extendHook = new ExtendHook(hook);
+    extendHook.addRequirements(hook);
+
     autonomousOne = new AutonomousOne(driveTrain, vision, intake, loader, shooter);
     autonomousTwo = new AutonomousTwo(driveTrain, vision, intake, loader, shooter);
     autonomousThree = new AutonomousThree(driveTrain, vision, intake, loader, shooter);
@@ -119,11 +126,20 @@ public class RobotContainer {
     track.whileHeld(new VisionTrack(vision, driveTrain));
     track.whileHeld(new Aim(shooter));
 
-    JoystickButton moveToColor = new JoystickButton(xbox, XboxController.Button.kY.value);
+    JoystickButton moveToColor = new JoystickButton(xbox, XboxController.Button.kB.value);
     moveToColor.whileHeld(spinUntilColor);
 
     JoystickButton spinColorWheel = new JoystickButton(xbox, XboxController.Button.kBumperLeft.value);
     spinColorWheel.whileHeld(new SpinColorWheel(colorWheel));
+    
+    JoystickButton aimUp = new JoystickButton(xbox, XboxController.Button.kY.value);
+    aimUp.whenPressed(new RaiseAim(shooter));
+
+    JoystickButton aimDown = new JoystickButton(xbox, XboxController.Button.kX.value);
+    aimDown.whenPressed(new LowerAim(shooter));
+
+    JoystickButton extendHookButton = new JoystickButton(xbox, XboxController.Button.kBumperRight.value);
+    extendHookButton.toggleWhenPressed(extendHook);
   }
   
   public static void resetGyro() {

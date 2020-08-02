@@ -42,6 +42,8 @@ public final class Constants {
 	public static final int xboxPort = 0;
 	public static final I2C.Port i2cPort = I2C.Port.kOnboard;
 	public static final int ultrasonicSensorPort = 0;
+	public static final int hookSolenoidPort1 = 7;
+	public static final int hookSolenoidPort2 = 6;
 
 	//Motor Speeds
 	public static final double throttle = 1;  //Teleop max speed

@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter extends SubsystemBase {
@@ -49,6 +50,8 @@ public class Shooter extends SubsystemBase {
 
   public void shootXbox(XboxController xbox, double speed){
     shooter.set(xbox.getTriggerAxis(Hand.kRight)*speed);
+    servo.setAngle(finalTheta);
+    SmartDashboard.putNumber("Servo Angle", servo.getAngle());
   }
 
   public void shoot(double speed){
@@ -69,5 +72,17 @@ public class Shooter extends SubsystemBase {
     
     servo.setAngle(finalTheta);  //Might need some conversion afterward
 
+  }
+
+  public void raiseAim(){
+    if(finalTheta < 65)
+      finalTheta++;
+    servo.setAngle(finalTheta);
+  }
+
+  public void lowerAim(){
+    if(finalTheta > 10)
+      finalTheta--;
+    servo.setAngle(finalTheta);
   }
 }
