@@ -24,37 +24,35 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class SwerveDrive extends SubsystemBase {
-  XboxController xbox;
-  AHRS gyro;
+  private AHRS gyro;
   
-  Translation2d frontLeftLocation; 
-  Translation2d frontRightLocation; 
-  Translation2d backLeftLocation; 
-  Translation2d backRightLocation; 
+  private Translation2d frontLeftLocation; 
+  private Translation2d frontRightLocation; 
+  private Translation2d backLeftLocation; 
+  private Translation2d backRightLocation; 
 
-  SwerveDriveKinematics kinematics;
+  private SwerveDriveKinematics kinematics;
 
-  ChassisSpeeds speeds;
+  private ChassisSpeeds speeds;
 
-  SwerveModuleState[] moduleStates;
-  SwerveModuleState frontLeft;
-  SwerveModuleState frontRight;
-  SwerveModuleState backLeft;
-  SwerveModuleState backRight;
-  TalonFX FrontLeftSpeed;
-  TalonFX FrontRightSpeed;
-  TalonFX BackLeftSpeed;
-  TalonFX BackRightSpeed;
-  TalonFX FrontLeftAngle;
-  TalonFX FrontRightAngle;
-  TalonFX BackLeftAngle;
-  TalonFX BackRightAngle;
+  private SwerveModuleState[] moduleStates;
+  private SwerveModuleState frontLeft;
+  private SwerveModuleState frontRight;
+  private SwerveModuleState backLeft;
+  private SwerveModuleState backRight;
+  private TalonFX FrontLeftSpeed;
+  private TalonFX FrontRightSpeed;
+  private TalonFX BackLeftSpeed;
+  private TalonFX BackRightSpeed;
+  private TalonFX FrontLeftAngle;
+  private TalonFX FrontRightAngle;
+  private TalonFX BackLeftAngle;
+  private TalonFX BackRightAngle;
   
   /**
    * Creates a new SwerveDrive.
    */
   public SwerveDrive(XboxController xbox, AHRS gyro) {
-    this.xbox = xbox;
     this.gyro = gyro;
 
     frontLeftLocation = new Translation2d(Constants.wheelPositionAbsoluteValue, Constants.wheelPositionAbsoluteValue);

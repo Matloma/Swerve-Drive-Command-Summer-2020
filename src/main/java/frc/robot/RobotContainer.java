@@ -60,7 +60,7 @@ public class RobotContainer {
   private final AutonomousTwo autonomousTwo;
   private final AutonomousThree autonomousThree;
 
-  SendableChooser<Command> chooser = new SendableChooser<>();
+  private SendableChooser<Command> chooser = new SendableChooser<>();
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -75,6 +75,8 @@ public class RobotContainer {
     driveXbox = new DriveXbox(driveTrain);
     driveXbox.addRequirements(driveTrain);
     driveTrain.setDefaultCommand(driveXbox);
+  
+    CommandScheduler.getInstance().schedule(new SetDriveTrainAngle0(driveTrain));
 
     vision = new Vision(driveTrain);
 
@@ -159,7 +161,7 @@ public class RobotContainer {
     // return getTeamStationCommand();
   }
 
-  public Command getTeamStationCommand(){
+  private Command getTeamStationCommand(){
     if(DriverStation.getInstance().getLocation()==1){
       return autonomousOne;
     }else if(DriverStation.getInstance().getLocation()==2){

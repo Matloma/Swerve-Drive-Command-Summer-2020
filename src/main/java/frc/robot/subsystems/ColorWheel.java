@@ -25,11 +25,11 @@ public class ColorWheel extends SubsystemBase {
   private final Color redTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
   private final Color yellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
-  Color detectedColor;
-  String colorString;
-  ColorMatchResult match;
+  private Color detectedColor;
+  private String colorString;
+  private ColorMatchResult match;
 
-  Victor colorWheelMotor;
+  private Victor colorWheelMotor;
 
   /**
    * Creates a new ColorWheel.

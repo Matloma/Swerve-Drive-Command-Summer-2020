@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hook extends SubsystemBase {
-  DoubleSolenoid hook;
+  private DoubleSolenoid hook;
   private boolean extended = false;
   /**
    * Creates a new Hook.

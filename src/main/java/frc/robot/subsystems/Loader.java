@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 public class Loader extends SubsystemBase {
-  Victor loader;
+  private Victor loader;
   /**
    * Creates a new Loader.
    */

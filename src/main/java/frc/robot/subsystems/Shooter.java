@@ -17,12 +17,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class Shooter extends SubsystemBase {
-  Victor shooter;
-  Servo servo;
-  AnalogInput ultrasonic;
-  double finalTheta = 65;
-  double distanceKnown; 
-  DistanceObject[] vals;
+  private Victor shooter;
+  private Servo servo;
+  private AnalogInput ultrasonic;
+  private double finalTheta = 65;
+  private double distanceKnown; 
+  private DistanceObject[] vals;
 
   /**
    * Creates a new Shooter.

@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  TalonSRX intake;
+  private TalonSRX intake;
   /**
    * Creates a new Intake.
    */

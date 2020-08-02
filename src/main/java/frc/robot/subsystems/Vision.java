@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class Vision extends SubsystemBase {
   private Pixy2 pixy;
-  boolean isCamera = false;
-  int state = -1;
+  private boolean isCamera = false;
+  private int state = -1;
   /**
    * Creates a new Vision.
    */
