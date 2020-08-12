@@ -161,7 +161,7 @@ public class RobotContainer {
     // return getTeamStationCommand();
   }
 
-  private Command getTeamStationCommand(){
+  /* private Command getTeamStationCommand(){
     if(DriverStation.getInstance().getLocation()==1){
       return autonomousOne;
     }else if(DriverStation.getInstance().getLocation()==2){
@@ -169,5 +169,5 @@ public class RobotContainer {
     }else{
       return autonomousThree;
     }
-  }
+  } */
 }
