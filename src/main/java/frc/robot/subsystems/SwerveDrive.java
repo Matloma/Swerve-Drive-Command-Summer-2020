@@ -62,14 +62,7 @@ public class SwerveDrive extends SubsystemBase {
 
     kinematics = new SwerveDriveKinematics(frontLeftLocation, frontRightLocation, backLeftLocation, backRightLocation);
 
-    speeds = ChassisSpeeds.fromFieldRelativeSpeeds(xbox.getY(Hand.kLeft)*-1, xbox.getX(Hand.kLeft)*-1, -1*xbox.getX(Hand.kRight), Rotation2d.fromDegrees(gyro.getAngle()));
-
-    moduleStates = kinematics.toSwerveModuleStates(speeds);
-    frontLeft = moduleStates[0];
-    frontRight = moduleStates[1];
-    backLeft = moduleStates[2];
-    backRight = moduleStates[3];
-
+    
     FrontLeftSpeed = new TalonFX(Constants.frontLeftMotorCanPort);
     FrontLeftAngle = new TalonFX(Constants.frontLeftAngleCanPort);
     FrontRightSpeed = new TalonFX(Constants.frontRightMotorCanPort);
